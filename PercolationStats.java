@@ -1,5 +1,5 @@
 /******************************************************************************
-  *  Author :      Deniz Ece Aktan
+  *  Author:       Deniz Ece Aktan
   *  Compilation:  javac PercolationStats.java
   *  Execution:    java PercolationStats int gridSz int testNum
   * 

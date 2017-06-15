@@ -1,4 +1,5 @@
 /******************************************************************************
+ *  this code was provided by course (coursera algs4)
  *  Compilation:  javac PercolationVisualizer.java
  *  Execution:    java PercolationVisualizer input.txt
  *  Dependencies: Percolation.java

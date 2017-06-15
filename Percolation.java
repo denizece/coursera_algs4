@@ -1,5 +1,5 @@
 /******************************************************************************
-  *  Author :      Deniz Ece Aktan
+  *  Author:       Deniz Ece Aktan
   *  Compilation:  javac Percolation.java
   *  Execution:    java Percolation
   * 
