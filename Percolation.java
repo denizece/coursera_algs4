@@ -1,4 +1,5 @@
 /******************************************************************************
+  *  Author :      Deniz Ece Aktan
   *  Compilation:  javac Percolation.java
   *  Execution:    java Percolation
   * 
@@ -43,29 +44,6 @@ public class Percolation {
             backwashEliminateUF.union(0, node + 1); // union top node to top row
         }
     }
-    private void validateIndex(int i, int j) {
-        if (i < 1 || i > gridSz || j < 1 || j > gridSz)
-            throw new java.lang.IndexOutOfBoundsException();
-    }
-    private int xyTo1D(int x, int y) {
-        int oneD = (x - 1) * gridSz + (y - 1) + 1; // + 1 from col(y) because of +1 node on top
-        return oneD;
-    }
-    // is site (row, col) open?
-    public boolean isOpen(int row, int col) {
-        validateIndex(row, col);
-        return grid[row - 1][col - 1];
-    }
-    
-    // is site (row, col) full?
-    public boolean isFull(int row, int col) {
-        validateIndex(row, col);
-        return isOpen(row, col) && backwashEliminateUF.connected(xyTo1D(row, col), 0);
-    }
-    // number of open sites
-    public int numberOfOpenSites() {
-        return openSites;
-    }
     // open site (row, col) if it is not open already
     public void open(int row, int col) {
         validateIndex(row, col);
@@ -93,10 +71,19 @@ public class Percolation {
             }        
         }
     }
-    private boolean connected(int x1, int y1, int x2, int y2) {
-        validateIndex(x1, y1);
-        validateIndex(x2, y2);
-        return uf.connected(xyTo1D(x1, y1), xyTo1D(x2, y2));
+    // is site (row, col) open?
+    public boolean isOpen(int row, int col) {
+        validateIndex(row, col);
+        return grid[row - 1][col - 1];
+    }
+    // is site (row, col) full?
+    public boolean isFull(int row, int col) {
+        validateIndex(row, col);
+        return isOpen(row, col) && backwashEliminateUF.connected(xyTo1D(row, col), 0);
+    }
+    // number of open sites
+    public int numberOfOpenSites() {
+        return openSites;
     }
     // does the system percolate?
     public boolean percolates() {
@@ -104,23 +91,12 @@ public class Percolation {
             return isOpen(1, 1); // corner case gridSz = 1
         return uf.connected(0, treeSize-1);
     }
-    
-    public  static void main(String[]args) {
-        Percolation p = new Percolation(3);
-        p.open(1, 1);
-        System.out.println("------opened 1,1");
-        System.out.println("------opened 1,2");
-        p.open(1, 2);
-        System.out.println("------is connected? (1, 1),(1, 2) "+p.connected(1, 1, 1, 2));
-        System.out.println("------is open? (1, 2) "+p.isOpen(1, 2));
-        boolean perc = p.percolates();
-        System.out.println("------percolate? "+perc);
-        p.open(2, 2);
-        p.open(3, 2);
-        System.out.println("------is connected?(1, 1)(3, 2) "+p.connected(1, 1, 3, 2));
-        perc = p.percolates();
-        System.out.println("------percolate? "+perc);
-        System.out.println("------number of open sites? "+p.numberOfOpenSites());
-        
+    private void validateIndex(int i, int j) {
+        if (i < 1 || i > gridSz || j < 1 || j > gridSz)
+            throw new java.lang.IndexOutOfBoundsException();
+    }
+    private int xyTo1D(int x, int y) {
+        int oneD = (x - 1) * gridSz + (y - 1) + 1; // + 1 from col(y) because of +1 node on top
+        return oneD;
     }
 }
